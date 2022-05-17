@@ -23,17 +23,29 @@ Our framework is based on a continuous bilevel formulation of the problem of lea
 All parameters are  set in the "demo.m" file, here we show the key parameters:
 
 TERM Hyperparameter "t":	param.TERM		              =           -0.001;
+
 Samples For Each Task:		  param.N                             =           50;
+
 Dimension:		                       param.P                              =           50;
+
 Total Tasks:		                       param.T                              =           500;
+
 Total Groups:		                    param.L                             =           50;
+
 Regularization Parameter:	 param.lambda                  =         0.01;
+
 Noise Types:	                         synth.noise.distrib           =          'normal';
+
 Noise Percentage:		          synth.noise.level		       =           0.5; 
+
 Outlier Numbers:		           synth.outlier.number	   =             0; 
+
 Outlier Deviation:		           synth.outlier.deviation	 =             5;
+
 HQ Loops:			                    param.inner.modalIter    =             3;
+
 Inner Loops:		                    param.inner.itermax        =           200;
+
 Outer Loops:		                   param.outer.itermax        =          2000;
 
 
