@@ -56,11 +56,11 @@ We provide four criteria mentioned in our paper, inlcuding average square error 
 
 For example, if the variables satisfy:
 
-![image-20220517151659130](structure1.png)
+![structure1.png](https://s2.loli.net/2022/05/17/RkliBFmyfPpSwoN.png)
 
 Then the corresponding structure is:
 
-![image-20220517151722729](structure2.png)
+![structure2.png](https://s2.loli.net/2022/05/17/5KbjlsgekFXn2xd.png)
 
 
 
