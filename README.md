@@ -87,5 +87,7 @@ TERMGL has better performamce on prediction (see tables 2-6 in the paper) and va
 For more details, please refer to the paper (submitting).
 
 [1] Frecon J, Salzo S, Pontil M. Bilevel learning of the group lasso structure[J]. Advances in neural information processing systems, 2018, 31.
+
 [2] Feng Y, Huang X, Shi L, et al. Learning with the maximum correntropy criterion induced losses for regression[J]. J. Mach. Learn. Res., 2015, 16(30): 993-1034.
+
 [3] Li T, Beirami A, Sanjabi M, et al. Tilted empirical risk minimization[J]. arXiv preprint arXiv:2007.01162, 2020.
