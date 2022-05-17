@@ -86,7 +86,7 @@ TERMGL has better performamce on prediction (see tables 2-6 in the paper) and va
 
 For more details, please refer to the paper (submitting).
 
-# Reference:
+# Reference
 
 [1] Frecon J, Salzo S, Pontil M. Bilevel learning of the group lasso structure[J]. Advances in neural information processing systems, 2018, 31.
 
