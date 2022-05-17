@@ -56,11 +56,11 @@ We provide four criteria mentioned in our paper, inlcuding average square error 
 
 For example, if the variables satisfy:
 
-![image-20220517151659130](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220517151659130.png)
+![image-20220517151659130](structure1.png)
 
 Then the corresponding structure is:
 
-![image-20220517151722729](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20220517151722729.png)
+![image-20220517151722729](structure2.png)
 
 
 
@@ -73,28 +73,4 @@ We randomly add four types of noises (Gaussian & Student & Exponential & Chi-squ
 TERMGL has better performamce on prediction (see tables 2-6 in the paper) and variable recovery (see figures 1-5 in the paper).
 
 For more details, please refer to the paper (submitting).
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
