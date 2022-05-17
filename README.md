@@ -4,9 +4,9 @@
 
 ## Requirements
 
-* Recommenedation :                                                         *
+* Recommenedation :                                                         
 
-* This code is designed to work with Matlab 2019a       *
+* This code is designed to work with Matlab 2019a       
 
   
 
