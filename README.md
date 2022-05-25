@@ -16,6 +16,7 @@ This code provides an efficient and robust approach to learn the variable struct
 
 Our framework is based on a continuous bilevel formulation of the problem of learning the variable structure.
 
+The proposal is called "TERMGL", which aims to solve Group Lasso regression problems based on TERM robustly without limitations of prior structure information.
 
 
 ## Experimental setting
