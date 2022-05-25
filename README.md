@@ -78,7 +78,7 @@ Then the corresponding structure is:
 
 # Simulation results
 
- We compare the proposal method (named TERMGL) with the baseline BiGL (see[1]). Besides, we also compare with some sparse learning methods (Lasso & Group Lasso) and some robust learning methods (MCC[] & Huber regression & TERM[3]).
+ We compare the proposal method (named TERMGL) with the baseline BiGL (see[1]). Besides, we also compare with some sparse learning methods (Lasso & Group Lasso) and some robust learning methods (MCC[2] & Huber regression & TERM[3]).
 
 We randomly add four types of noises (Gaussian & Student & Exponential & Chi-square noises) and five levels of percentages of outliers (0% & 10% & 20% & 30% & 40% outliers) to compare and highlight the robustness of our proposal.
 
