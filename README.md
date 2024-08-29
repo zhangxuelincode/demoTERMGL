@@ -1,10 +1,10 @@
-# Demo for "Robust Variable Structure Discovery Based on Tilted Empirical Risk Minimization"
+# Demo for "Robust Variable Structure Discovery Based on Tilted Empirical Risk Minimization" Accepted by Applied Intelligence
 
 
 
 ## Requirements
 
-* Recommenedation :                                                         
+* Recommendation :                                                         
 
 * This code is designed to work with Matlab 2019a       
 
@@ -61,7 +61,7 @@ Besides, we provide a demo to help to get start with our code.
 ## Evaluation
 
 To evaluate the model in the paper, run evaluation.m;
-We provide four criteria mentioned in our paper, inlcuding average square error (ASE), true deviation (TD), width of prediction intervals (WPI) and sample coverage probability (SCP).
+We provide four criteria mentioned in our paper, including average square error (ASE), true deviation (TD), width of prediction intervals (WPI), and sample coverage probability (SCP).
 
 
 
@@ -83,7 +83,7 @@ Then the corresponding structure is:
 
 We randomly add four types of noises (Gaussian & Student & Exponential & Chi-square noises) and five levels of percentages of outliers (0% & 10% & 20% & 30% & 40% outliers) to compare and highlight the robustness of our proposal.
 
-TERMGL has better performamce on prediction (see tables 2-6 in the paper) and variable recovery (see figures 1-5 in the paper).
+TERMGL has better performance on prediction (see tables 2-6 in the paper) and variable recovery (see figures 1-5 in the paper).
 
 For more details, please refer to the paper (submitting).
 
