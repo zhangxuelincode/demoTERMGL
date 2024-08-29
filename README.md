@@ -1,10 +1,10 @@
-# Demo for "Robust Variable Structure Discovery Based on Tilted Empirical Risk Minimization"
+# Demo for "Robust Variable Structure Discovery Based on Tilted Empirical Risk Minimization" accepted by Applied Intelligence
 
 
 
 ## Requirements
 
-* Recommenedation :                                                         
+* Recommendation :                                                         
 
 * This code is designed to work with Matlab 2019a       
 
@@ -61,7 +61,7 @@ Besides, we provide a demo to help to get start with our code.
 ## Evaluation
 
 To evaluate the model in the paper, run evaluation.m;
-We provide four criteria mentioned in our paper, inlcuding average square error (ASE), true deviation (TD), width of prediction intervals (WPI) and sample coverage probability (SCP).
+We provide four criteria mentioned in our paper, including average square error (ASE), true deviation (TD), width of prediction intervals (WPI), and sample coverage probability (SCP).
 
 
 
