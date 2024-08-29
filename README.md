@@ -1,4 +1,4 @@
-# Demo for "Robust Variable Structure Discovery Based on Tilted Empirical Risk Minimization"
+# Demo for "Robust Variable Structure Discovery Based on Tilted Empirical Risk Minimization" Accepted by Applied Intelligence
 
 
 
