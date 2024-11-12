@@ -94,3 +94,16 @@ For more details, please refer to the paper (submitting).
 [2] Feng Y, Huang X, Shi L, et al. Learning with the maximum correntropy criterion induced losses for regression[J]. J. Mach. Learn. Res., 2015, 16(30): 993-1034.
 
 [3] Li T, Beirami A, Sanjabi M, et al. Tilted empirical risk minimization[J]. arXiv preprint arXiv:2007.01162, 2020.
+
+# Bibtex
+@article{zhang2023robust,
+  title={Robust variable structure discovery based on tilted empirical risk minimization},
+  author={Zhang, Xuelin and Wang, Yingjie and Zhu, Liangxuan and Chen, Hong and Li, Han and Wu, Lingjuan},
+  journal={Applied Intelligence},
+  volume={53},
+  number={14},
+  pages={17865--17886},
+  year={2023},
+  publisher={Springer}
+}
+
