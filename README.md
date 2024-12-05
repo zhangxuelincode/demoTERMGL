@@ -85,7 +85,7 @@ We randomly add four types of noises (Gaussian & Student & Exponential & Chi-squ
 
 TERMGL has better performamce on prediction (see tables 2-6 in the paper) and variable recovery (see figures 1-5 in the paper).
 
-For more details, please refer to the paper (submitting).
+For more details, please refer to the paper in ([Applied Intelligence](https://link.springer.com/article/10.1007/s10489-022-04409-z)).
 
 # Reference
 
