@@ -1,97 +1,176 @@
-# Demo for TERMGL
+<p align="center">
+  <a href="README.md">English</a> | <a href="README_zh-CN.md">简体中文</a>
+</p>
 
+<div align="center">
 
+# TERMGL
 
-## Requirements
+**Robust Variable Structure Discovery via Tilted Empirical Risk Minimization**
 
-* Recommendation :                                                         
+A bilevel-optimization framework that simultaneously learns a shared group
+structure across tasks and robustly fits multi-task regression models under
+heavy-tailed noise, outliers, partial annotation and corrupted features.
 
-* This code is designed to work with Matlab 2019a       
+[![Paper](https://img.shields.io/badge/Paper-Applied%20Intelligence-blue)](https://doi.org/10.1007/s10489-023-04923-9)
+[![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
+[![NumPy](https://img.shields.io/badge/NumPy-%3E%3D1.24-013243?logo=numpy&logoColor=white)](https://numpy.org/)
+[![Tests](https://img.shields.io/badge/Tests-passing-brightgreen)](demo_TERMGL/tests)
+[![License](https://img.shields.io/badge/License-MIT-green)](#license)
 
-  
+</div>
 
-## DESCRIPTION 
+## 📰 News
 
-This code provides an efficient and robust approach to learn the variable structure automatically without prior information. 
+- **[2026-09]** Python reference implementation released: exact unrolled
+  hypergradient through the HQ-DFBB lower solver, SAGA upper-level aggregation,
+  partial-annotation and noisy-dimension stress factors, full pytest suite.
+- **[2023-09]** Paper *Robust variable structure discovery based on tilted
+  empirical risk minimization* published in Applied Intelligence 53(14).
 
-Our framework is based on a continuous bilevel formulation of the problem of learning the variable structure.
+## ✨ Highlights
 
-The proposal is called "TERMGL", which aims to solve Group Lasso regression problems based on TERM robustly without limitations of prior structure information.
+1. **Tilted empirical risk (TERM) with a closed-form tilt step.** The tilted
+   risk `(1/t)·log[(1/n)·Σᵢ exp(t·ℓᵢ(w))]` admits the variational form
+   `min_{q∈Δ} Σᵢ qᵢℓᵢ(w) + (1/t)·Σᵢ qᵢ log(n·qᵢ)`; the optimal tilt weights
+   `D = n·softmax(t·r²/2σ²)` have mean one and shrink outliers to zero weight
+   exponentially fast (t < 0).
+2. **Half-quadratic modal iterations wrap a dual forward–backward (DFBB)
+   scheme.** Each W-step solves the weighted learned group-lasso problem in
+   the dual with Bregman distances; the recursion is carried in v-space where
+   the exact identity `∇φ∘∇φ*(v) = v` guarantees numerical stability as the
+   dual saturates onto the η-ball boundary.
+3. **Exact unrolled hypergradient including the exponential-tilt weight
+   chain.** Reverse-mode differentiation of the full HQ-DFBB recursion
+   propagates through the weights `D(w) = n·softmax(t·r²/2σ²)` — a term that
+   vanishes for locally-constant robust kernels (e.g. Epanechnikov) but is
+   essential for the exponential loss, which is what makes the TERMGL bilevel
+   problem and its optimization scheme genuinely different from
+   kernel-weighted bilevel baselines. A fast fixed-point (Neumann) mode in the
+   style of kernel-weighted engineering is also provided.
+4. **SAGA variance reduction on the upper level.** Per-task hypergradients are
+   aggregated differentially (`aux_mean += (hg_t − aux_all_t)/|A|`) with an
+   automatic step size `10^{−(1+⌊log₁₀ max|hg|⌋)}` and row-wise Euclidean
+   projection of the structure matrix θ onto the unit simplex (exactly the
+   BiGLasso engineering).
+5. **Stress-factor experiments beyond the paper.** Partial annotation
+   (structure transfer to unannotated tasks) and noisy dimensions (corrupted
+   feature columns in trn/val with clean test designs) are supported out of
+   the box.
+6. **Verified correctness.** 33 unit tests: DFBB cross-validated against an
+   independent FISTA group-lasso solver, hypergradient checked against
+   central finite differences (tilt = 0 and t < 0), KKT conditions, TERM
+   monotone decrease, SAGA aggregation invariants.
 
+## 🚀 Quick Start
 
-## Experimental setting
+### 1. Environment
 
-All parameters are  set in the "demo.m" file, here we show the key parameters:
+```bash
+cd demo_TERMGL
+pip install numpy scipy pandas pytest
+```
 
-TERM Hyperparameter "t":	param.TERM		              =           -0.001;
+### 2. Run the unit tests
 
-Samples For Each Task:		  param.N                             =           50;
+```bash
+python -m pytest tests -q
+# 33 passed
+```
 
-Dimension:		                       param.P                              =           50;
+### 3. Run a first bilevel experiment
 
-Total Tasks:		                       param.T                              =           500;
+```python
+from termgl import TERMGLConfig
+from termgl.bilevel import run_experiment
 
-Total Groups:		                    param.L                             =           50;
+cfg = TERMGLConfig(
+    N=50, P=50, T=200, L=5, G=2,        # samples / features / tasks / groups
+    sigma=1.0, lam=0.5, mu=1e-3,
+    tilt=-1e-3,                          # robust exponential tilt (t < 0)
+    noise_distrib="normal",
+    outlier_number=10, outlier_type=2,   # 20% additive outliers
+    modal_iter=2, inner_itermax=600,
+    outer_itermax=300, batch_size=4,
+    annotation_ratio=0.5,                # partial annotation
+    noisy_dims_fraction=0.3,             # 30% corrupted feature columns
+    seed=0)
 
-Regularization Parameter:	 param.lambda                  =         0.01;
+res = run_experiment(cfg)
+print(res["eval"]["td_mean"])          # total deviation vs noiseless y
+print(res["structure"]["assignment_accuracy"])
+```
 
-Noise Types:	                         synth.noise.distrib           =          'normal';
+### 4. Reproduce the paper-style simulation grid
 
-Noise Percentage:		          synth.noise.level		       =           0.5; 
+```bash
+python run_simulation.py        # 4 noises x outliers + stress factors
+# -> results/results.csv (TERMGL vs ridge vs oracle-structure baselines)
+```
 
-Outlier Numbers:		           synth.outlier.number	   =             0; 
+## 📊 Methods Compared
 
-Outlier Deviation:		           synth.outlier.deviation	 =             5;
+| Method   | Structure θ                     | Robust loss        |
+|----------|---------------------------------|--------------------|
+| TERMGL   | bilevel-learned (simplex rows)  | tilted exp. risk   |
+| ridge    | uniform (no groups)             | none               |
+| oracle   | true indicator θ*               | tilted exp. risk   |
 
-HQ Loops:			                    param.inner.modalIter    =             3;
+Metrics follow the MATLAB `Evaluation.m`: **ASE** (vs noisy test responses),
+**TD** (vs noiseless responses), α-level interval coverage, and
+group-assignment accuracy.
 
-Inner Loops:		                    param.inner.itermax        =           200;
+## 📁 Repository Structure
 
-Outer Loops:		                   param.outer.itermax        =          2000;
+```
+├── demo.m, MAIN.m, ...          # original MATLAB implementation
+├── functions/                   # MATLAB lower/upper solvers & data synthesis
+│   └── Dual_process.m           # DFBB core (w inside the loop, v via ∇φ∘∇φ*=id)
+└── demo_TERMGL/                 # Python reference implementation
+    ├── termgl/
+    │   ├── config.py            # all hyper-parameters (mirrors demo.m)
+    │   ├── data.py              # synthesis, partial annotation, noisy dims
+    │   ├── dfbb.py              # HQ modal iterations + dual forward-backward
+    │   ├── hypergrad.py         # exact unrolled / fixed-point hypergradients
+    │   ├── projection.py        # Condat simplex projection
+    │   ├── bilevel.py           # SAGA upper level, structure transfer
+    │   └── evaluation.py        # ASE / TD / coverage / structure metrics
+    ├── tests/                   # 33 unit tests (FISTA & finite-difference refs)
+    ├── run_simulation.py        # paper-style simulation grid -> results.csv
+    └── results/
+```
 
+## 🔍 Notes on the Bilevel Design
 
+- **Initialization matters.** The exact uniform structure matrix is a
+  symmetric critical point of the upper problem (the hypergradient vanishes
+  identically by column-permutation symmetry), so θ is initialized as
+  `proxl(1/L·1 + 0.01·randn)` — exactly the BiGLasso trick.
+- **Convergence budget.** The dual variable approaches the ball boundary only
+  algebraically, so the W-step needs a generous DFBB budget (default
+  `inner_itermax=1000`; the FISTA cross-validation test uses 20 000).
+- **Dual_process.m.** The MATLAB core keeps `w` inside the DFBB loop and
+  accumulates `v` through the identity `∇φ(∇φ*(v)) = v`, matching the official
+  BiGLasso reference; the initialPoint field path is fixed.
 
-## Training
+## 📖 Reference
 
-To train the model in the paper, run Main.m;
-Besides, we provide a demo to help to get start with our code.
+```bibtex
+@article{zhang2023termgl,
+  title   = {Robust variable structure discovery based on tilted empirical risk minimization},
+  author  = {Zhang, Xuelin and others},
+  journal = {Applied Intelligence},
+  volume  = {53},
+  number  = {14},
+  pages   = {17865--17886},
+  year    = {2023}
+}
+```
 
+The bilevel framework follows **BiGL** (Frecon, Salzo, Pontil, NeurIPS 2018)
+and the SAGA/automatic-step-size upper-level engineering follows the
+kernel-weighted bilevel reference implementation used for comparison.
 
+## License
 
-## Evaluation
-
-To evaluate the model in the paper, run evaluation.m;
-We provide four criteria mentioned in our paper, including average square error (ASE), true deviation (TD), width of prediction intervals (WPI), and sample coverage probability (SCP).
-
-
-
-## Variable structure
-
-For example, if the variables satisfy:
-
-![structure1.png](https://s2.loli.net/2022/05/17/RkliBFmyfPpSwoN.png)
-
-Then the corresponding structure is:
-
-![structure2.png](https://s2.loli.net/2022/05/17/5KbjlsgekFXn2xd.png)
-
-
-
-# Simulation results
-
- We compare the proposal method (named TERMGL) with the baseline BiGL (see[1]). Besides, we also compare with some sparse learning methods (Lasso & Group Lasso) and some robust learning methods (MCC[2] & Huber regression & TERM[3]).
-
-We randomly add four types of noises (Gaussian & Student & Exponential & Chi-square noises) and five levels of percentages of outliers (0% & 10% & 20% & 30% & 40% outliers) to compare and highlight the robustness of our proposal.
-
-TERMGL has better performamce on prediction (see tables 2-6 in the paper) and variable recovery (see figures 1-5 in the paper).
-
-For more details, please refer to the paper (submitting).
-
-# Reference
-
-[1] Frecon J, Salzo S, Pontil M. Bilevel learning of the group lasso structure[J]. Advances in neural information processing systems, 2018, 31.
-
-[2] Feng Y, Huang X, Shi L, et al. Learning with the maximum correntropy criterion induced losses for regression[J]. J. Mach. Learn. Res., 2015, 16(30): 993-1034.
-
-[3] Li T, Beirami A, Sanjabi M, et al. Tilted empirical risk minimization[J]. arXiv preprint arXiv:2007.01162, 2020.
-
+This project is released under the [MIT License](LICENSE).

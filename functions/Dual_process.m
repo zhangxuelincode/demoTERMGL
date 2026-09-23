@@ -9,12 +9,12 @@ end
 if ~isfield(param.inner,'initialPoint')
     u = zeros(size(x_trn,2),size(theta,2));
 else
-    u   = param.initialPoint.u;
+    u   = param.inner.initialPoint.u;
 end
 for iter = 1:param.inner.itermax  
     %%%%%%%%%%%%%%%%% Forward Backward Scheme %%%%%%%%%%%%%%%%%    
-    w   = inner_func.trans_w(x_trn,y_trn,inner_func.opt_A_star(theta,u)); %W = (X'X + ¦ÅI)^-1 * (X'y - A¦È*u)
-    Aw  = inner_func.opt_A(theta,w);  % ÕâÊÇ A¦È ¹þ´ïÂê»ý W
+    w   = inner_func.trans_w(x_trn,y_trn,inner_func.opt_A_star(theta,u)); %W = (X'X + ï¿½ï¿½I)^-1 * (X'y - Aï¿½ï¿½*u)
+    Aw  = inner_func.opt_A(theta,w);  % ï¿½ï¿½ï¿½ï¿½ Aï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ W
     % Forward step
     v = stepsize*Aw;
     for ll=1:param.inner.nGroups

@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# Experiment outputs
+demo_TERMGL/results/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
