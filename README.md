@@ -15,7 +15,6 @@ heavy-tailed noise, outliers, partial annotation and corrupted features.
 [![Paper](https://img.shields.io/badge/Paper-Applied%20Intelligence-blue)](https://doi.org/10.1007/s10489-023-04923-9)
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
 [![NumPy](https://img.shields.io/badge/NumPy-%3E%3D1.24-013243?logo=numpy&logoColor=white)](https://numpy.org/)
-[![Tests](https://img.shields.io/badge/Tests-passing-brightgreen)](demo_TERMGL/tests)
 [![License](https://img.shields.io/badge/License-MIT-green)](#license)
 
 </div>
@@ -57,10 +56,10 @@ heavy-tailed noise, outliers, partial annotation and corrupted features.
    (structure transfer to unannotated tasks) and noisy dimensions (corrupted
    feature columns in trn/val with clean test designs) are supported out of
    the box.
-6. **Verified correctness.** 33 unit tests: DFBB cross-validated against an
-   independent FISTA group-lasso solver, hypergradient checked against
-   central finite differences (tilt = 0 and t < 0), KKT conditions, TERM
-   monotone decrease, SAGA aggregation invariants.
+6. **Test suite.** DFBB cross-validated against an independent FISTA
+   group-lasso solver; hypergradient checked against central finite
+   differences (tilt = 0 and t < 0); KKT conditions, TERM monotone
+   decrease and SAGA aggregation invariants.
 
 ## 🚀 Quick Start
 
@@ -75,7 +74,6 @@ pip install numpy scipy pandas pytest
 
 ```bash
 python -m pytest tests -q
-# 33 passed
 ```
 
 ### 3. Run a first bilevel experiment
@@ -135,7 +133,7 @@ group-assignment accuracy.
     │   ├── projection.py        # Condat simplex projection
     │   ├── bilevel.py           # SAGA upper level, structure transfer
     │   └── evaluation.py        # ASE / TD / coverage / structure metrics
-    ├── tests/                   # 33 unit tests (FISTA & finite-difference refs)
+    ├── tests/                   # pytest suite (FISTA & finite-difference refs)
     ├── run_simulation.py        # paper-style simulation grid -> results.csv
     └── results/
 ```

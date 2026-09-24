@@ -14,7 +14,6 @@
 [![Paper](https://img.shields.io/badge/Paper-Applied%20Intelligence-blue)](https://doi.org/10.1007/s10489-023-04923-9)
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
 [![NumPy](https://img.shields.io/badge/NumPy-%3E%3D1.24-013243?logo=numpy&logoColor=white)](https://numpy.org/)
-[![Tests](https://img.shields.io/badge/Tests-passing-brightgreen)](demo_TERMGL/tests)
 [![License](https://img.shields.io/badge/License-MIT-green)](#许可证)
 
 </div>
@@ -48,9 +47,9 @@
    （与 BiGLasso 工程完全一致）。
 5. **超出论文的压力因子实验。** 原生支持部分标注（结构迁移到未标注任务）与
    噪声维度（trn/val 设计矩阵特征列污染、测试设计保持干净）。
-6. **正确性经过验证。** 33 项单元测试：DFBB 与独立实现的 FISTA 组 Lasso
-   求解器交叉验证；超梯度与中心有限差分对照（tilt = 0 与 t < 0 两种情形）；
-   KKT 条件；TERM 单调下降；SAGA 聚合不变量。
+6. **测试套件。** DFBB 与独立实现的 FISTA 组 Lasso 求解器交叉验证；超梯度
+   与中心有限差分对照（tilt = 0 与 t < 0 两种情形）；覆盖 KKT 条件、TERM
+   单调下降与 SAGA 聚合不变量。
 
 ## 🚀 快速开始
 
@@ -65,7 +64,6 @@ pip install numpy scipy pandas pytest
 
 ```bash
 python -m pytest tests -q
-# 33 passed
 ```
 
 ### 3. 运行第一个双层实验
@@ -124,7 +122,7 @@ python run_simulation.py        # 4 种噪声 x 离群点 + 压力因子
     │   ├── projection.py        # Condat 单纯形投影
     │   ├── bilevel.py           # SAGA 上层、结构迁移
     │   └── evaluation.py        # ASE / TD / 覆盖率 / 结构指标
-    ├── tests/                   # 33 项单元测试（FISTA 与有限差分参照）
+    ├── tests/                   # 测试套件（FISTA 与有限差分参照）
     ├── run_simulation.py        # 论文风格仿真网格 -> results.csv
     └── results/
 ```
