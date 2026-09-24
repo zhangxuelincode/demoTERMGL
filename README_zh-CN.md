@@ -4,15 +4,15 @@
 
 <div align="center">
 
-# TERMGL
+# Robust variable structure discovery based on tilted empirical risk minimization
 
-**基于倾斜经验风险最小化的鲁棒变量结构发现**
+**TERMGL**
 
 一个双层优化框架：在重尾噪声、离群点、部分标注与特征污染等复杂场景下，
 同时学习跨任务的共享组结构，并鲁棒地拟合多任务回归模型。
 
-[![Paper](https://img.shields.io/badge/Paper-Applied%20Intelligence-blue)](https://doi.org/10.1007/s10489-023-04923-9)
-[![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
+[![Paper](https://img.shields.io/badge/Paper-Applied%20Intelligence-blue)](https://dl.acm.org/doi/abs/10.1007/s10489-022-04409-z)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
 [![NumPy](https://img.shields.io/badge/NumPy-%3E%3D1.24-013243?logo=numpy&logoColor=white)](https://numpy.org/)
 [![License](https://img.shields.io/badge/License-MIT-green)](#许可证)
 
@@ -141,14 +141,15 @@ python run_simulation.py        # 4 种噪声 x 离群点 + 压力因子
 ## 📖 引用
 
 ```bibtex
-@article{zhang2023termgl,
-  title   = {Robust variable structure discovery based on tilted empirical risk minimization},
-  author  = {Zhang, Xuelin and others},
-  journal = {Applied Intelligence},
-  volume  = {53},
-  number  = {14},
-  pages   = {17865--17886},
-  year    = {2023}
+@article{zhang2023robust,
+  title     = {Robust variable structure discovery based on tilted empirical risk minimization},
+  author    = {Zhang, Xuelin and Wang, Yingjie and Zhu, Liangxuan and Chen, Hong and Li, Han and Wu, Ling},
+  journal   = {Applied Intelligence},
+  volume    = {53},
+  number    = {14},
+  pages     = {17865--17886},
+  year      = {2023},
+  publisher = {Springer}
 }
 ```
 

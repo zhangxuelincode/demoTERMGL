@@ -4,16 +4,16 @@
 
 <div align="center">
 
-# TERMGL
+# Robust variable structure discovery based on tilted empirical risk minimization
 
-**Robust Variable Structure Discovery via Tilted Empirical Risk Minimization**
+**TERMGL**
 
 A bilevel-optimization framework that simultaneously learns a shared group
 structure across tasks and robustly fits multi-task regression models under
 heavy-tailed noise, outliers, partial annotation and corrupted features.
 
-[![Paper](https://img.shields.io/badge/Paper-Applied%20Intelligence-blue)](https://doi.org/10.1007/s10489-023-04923-9)
-[![Python](https://img.shields.io/badge/Python-3.9%2B-blue)](https://www.python.org/)
+[![Paper](https://img.shields.io/badge/Paper-Applied%20Intelligence-blue)](https://dl.acm.org/doi/abs/10.1007/s10489-022-04409-z)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](https://www.python.org/)
 [![NumPy](https://img.shields.io/badge/NumPy-%3E%3D1.24-013243?logo=numpy&logoColor=white)](https://numpy.org/)
 [![License](https://img.shields.io/badge/License-MIT-green)](#license)
 
@@ -154,14 +154,15 @@ group-assignment accuracy.
 ## 📖 Reference
 
 ```bibtex
-@article{zhang2023termgl,
-  title   = {Robust variable structure discovery based on tilted empirical risk minimization},
-  author  = {Zhang, Xuelin and others},
-  journal = {Applied Intelligence},
-  volume  = {53},
-  number  = {14},
-  pages   = {17865--17886},
-  year    = {2023}
+@article{zhang2023robust,
+  title     = {Robust variable structure discovery based on tilted empirical risk minimization},
+  author    = {Zhang, Xuelin and Wang, Yingjie and Zhu, Liangxuan and Chen, Hong and Li, Han and Wu, Ling},
+  journal   = {Applied Intelligence},
+  volume    = {53},
+  number    = {14},
+  pages     = {17865--17886},
+  year      = {2023},
+  publisher = {Springer}
 }
 ```
 
