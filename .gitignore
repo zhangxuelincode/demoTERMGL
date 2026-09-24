@@ -9,6 +9,9 @@ venv/
 demo_TERMGL/results/*
 !demo_TERMGL/results/results.csv
 
+# Never upload paper/manuscript PDFs
+*.pdf
+
 # OS / IDE
 .DS_Store
 Thumbs.db
